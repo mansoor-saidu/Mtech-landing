@@ -31,51 +31,49 @@ export function ClientsBar() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="rounded-[2rem] border border-border bg-card px-6 py-6 sm:px-8"
         >
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          {/* Top row: label + copy */}
+          <div className="mb-6">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-foreground/45 mb-1">
+              Trusted by
+            </p>
+            <p className="font-serif text-lg font-normal leading-snug tracking-[-0.02em] text-foreground sm:text-xl">
+              Businesses that took their digital presence seriously.
+            </p>
+          </div>
 
-            {/* Left: Trust copy */}
-            <div className="flex flex-col gap-1.5 md:max-w-sm">
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-foreground/45">
-                Trusted by
-              </p>
-              <p className="font-serif text-xl font-normal leading-snug tracking-[-0.02em] text-foreground sm:text-2xl">
-                Businesses that took their digital presence seriously.
-              </p>
-            </div>
+          {/* Bottom row: logos + WhatsApp */}
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
 
-            {/* Divider on desktop */}
-            <div className="hidden h-16 w-px bg-border md:block" />
-
-            {/* Centre: Client logos */}
-            <div className="flex flex-wrap items-center gap-6 sm:gap-10">
+            {/* Logos row — wraps nicely on small screens */}
+            <div className="flex flex-row flex-wrap items-center gap-6">
               {clients.map((client) => (
                 <div
                   key={client.name}
-                  className="group flex flex-col items-center gap-2"
+                  className="group flex flex-col items-center gap-1.5"
                   title={client.name}
                 >
                   <img
                     src={client.logo}
                     alt={`${client.name} logo`}
-                    className="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+                    className="h-8 w-auto object-contain opacity-60 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
                     loading="lazy"
                   />
-                  <span className="text-[10px] font-medium uppercase tracking-widest text-foreground/40 group-hover:text-foreground/70 transition-colors">
+                  <span className="text-[9px] font-medium uppercase tracking-widest text-foreground/40 group-hover:text-foreground/70 transition-colors whitespace-nowrap">
                     {client.type}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Divider on desktop */}
-            <div className="hidden h-16 w-px bg-border md:block" />
+            {/* Divider — only desktop */}
+            <div className="hidden sm:block h-14 w-px bg-border shrink-0" />
 
-            {/* Right: WhatsApp pill */}
+            {/* WhatsApp CTA — full width on mobile */}
             <a
               href="https://wa.me/2347055052039"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex w-fit items-center gap-3 rounded-full border border-[#25D366]/30 bg-[#25D366]/8 px-5 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:border-[#25D366]/60 hover:bg-[#25D366]/15 hover:text-foreground"
+              className="group inline-flex w-full sm:w-auto items-center gap-3 rounded-full border border-[#25D366]/30 bg-[#25D366]/8 px-5 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:border-[#25D366]/60 hover:bg-[#25D366]/15 hover:text-foreground"
             >
               {/* WhatsApp icon */}
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
