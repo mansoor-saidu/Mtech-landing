@@ -1,31 +1,28 @@
 import { ThemeProvider } from "next-themes";
 import React, { Suspense } from "react";
-import { Hero } from "./components/Hero";
+import { Route, Routes } from "react-router";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { Home } from "./pages/Home";
 
-// Lazy load below-the-fold components for better initial load performance (LCP/FCP)
-const Stats = React.lazy(() => import("./components/Stats").then(m => ({ default: m.Stats })));
-const Services = React.lazy(() => import("./components/Services").then(m => ({ default: m.Services })));
-const WhyChooseUs = React.lazy(() => import("./components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
-const Contact = React.lazy(() => import("./components/Contact").then(m => ({ default: m.Contact })));
-const Footer = React.lazy(() => import("./components/Footer").then(m => ({ default: m.Footer })));
+// Lazy load new pages
+const ProjectsIndex = React.lazy(() => import("./pages/ProjectsIndex"));
+const ProjectDetail = React.lazy(() => import("./pages/ProjectDetail"));
 
 export default function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
       <main className="min-h-screen bg-background text-foreground">
         <ThemeToggle />
-        <Hero />
         <Suspense fallback={
-          <div className="h-32 flex items-center justify-center opacity-50">
+          <div className="h-screen flex items-center justify-center opacity-50 bg-background">
             <img src="/mtech-animation.gif" alt="Loading..." className="w-16 h-16 object-contain" />
           </div>
         }>
-          <Stats />
-          <Services />
-          <WhyChooseUs />
-          <Contact />
-          <Footer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<ProjectsIndex />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
+          </Routes>
         </Suspense>
       </main>
     </ThemeProvider>

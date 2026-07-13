@@ -1,9 +1,29 @@
-import { motion } from "motion/react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { useInView } from "./hooks/useInView";
 import { useState } from "react";
-import { toast } from "sonner";
-import { Toaster } from "sonner";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { motion } from "motion/react";
+import { Toaster, toast } from "sonner";
+import { useInView } from "./hooks/useInView";
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "hello@mtechit.com.ng",
+    href: "mailto:hello@mtechit.com.ng",
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "07055052039",
+    href: "tel:07055052039",
+  },
+  {
+    icon: MapPin,
+    label: "Location",
+    value: "Ilorin, Nigeria",
+    href: "#",
+  },
+];
 
 export function Contact() {
   const { ref, inView } = useInView();
@@ -20,7 +40,7 @@ export function Contact() {
     setIsSubmitting(true);
 
     setTimeout(() => {
-      toast.success("Message sent successfully! We'll get back to you within 24 hours.");
+      toast.success("Message sent successfully. We’ll get back to you within 24 hours.");
       setFormData({ name: "", email: "", company: "", message: "" });
       setIsSubmitting(false);
     }, 1000);
@@ -30,100 +50,113 @@ export function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email Us",
-      value: "hello@mtechit.com.ng",
-      href: "mailto:hello@mtechit.com.ng",
-    },
-    {
-      icon: Phone,
-      label: "Call Us",
-      value: "07055052039",
-      href: "tel:07055052039",
-    },
-    {
-      icon: MapPin,
-      label: "Visit Us",
-      value: "Ilorin, Nigeria",
-      href: "#",
-    },
-  ];
-
   return (
-    <section id="contact" ref={ref} className="py-32 px-6 bg-muted/30">
+    <section id="contact" ref={ref} className="px-6 py-16 sm:py-20 lg:py-24">
       <Toaster position="top-center" richColors />
-      <div className="max-w-7xl mx-auto">
+
+      <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-20"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl space-y-3"
         >
-          <h2 className="mb-6 text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] font-semibold tracking-[-0.03em] leading-[1.1]">Let's Build Something Great</h2>
-          <p className="text-[1.125rem] md:text-[1.25rem] text-muted-foreground max-w-2xl mx-auto leading-[1.7] tracking-[-0.01em]">
-            Ready to transform your digital presence? Get in touch and let's discuss your project
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-foreground/45">
+            Contact
+          </p>
+          <h2 className="font-serif text-3xl font-normal leading-tight tracking-[-0.03em] sm:text-4xl lg:text-5xl">
+            Ready to turn a rough idea into something people actually remember?
+          </h2>
+          <p className="text-base leading-8 text-foreground/72 sm:text-lg">
+            Tell us what you’re building, who it’s for, and what business result you want from it. We’ll help shape the clearest path to shipping it.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-2"
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-6"
           >
-            <h3 className="mb-10 text-[1.75rem] font-semibold tracking-[-0.02em] leading-[1.2]">Get In Touch</h3>
-            <div className="space-y-6 mb-12">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <motion.a
-                    key={info.label}
-                    href={info.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.3 + index * 0.1,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                    whileHover={{ x: 4 }}
-                    className="flex items-center gap-5 p-5 rounded-2xl hover:bg-card border border-transparent hover:border-border transition-all"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-accent/50 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-[0.8125rem] text-muted-foreground mb-1 font-medium tracking-tight">{info.label}</div>
-                      <div className="tracking-[-0.01em] font-medium">{info.value}</div>
-                    </div>
-                  </motion.a>
-                );
-              })}
+            <div className="rounded-[2rem] border border-border bg-card p-6 sm:p-7">
+              <h3 className="text-lg font-medium tracking-[-0.02em] text-foreground">
+                Reach us directly
+              </h3>
+              <div className="mt-6 space-y-3">
+                {contactInfo.map((info) => {
+                  const Icon = info.icon;
+
+                  return (
+                    <a
+                      key={info.label}
+                      href={info.href}
+                      className="flex items-center gap-4 rounded-2xl border border-border bg-background px-4 py-4 transition-colors hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+                    >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-card">
+                        <Icon className="h-5 w-5 text-foreground/70" />
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/45">
+                          {info.label}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-foreground">
+                          {info.value}
+                        </p>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/20">
-              <h4 className="mb-3 text-[1.125rem] font-semibold tracking-[-0.015em] leading-[1.3]">Quick Response Guarantee</h4>
-              <p className="text-[0.9375rem] text-muted-foreground leading-[1.7] tracking-[-0.01em]">
-                We typically respond to all inquiries within 2 hours during business hours.
-                Your project deserves our immediate attention.
+            <div className="rounded-[2rem] border border-border bg-foreground p-6 text-background sm:p-7">
+              <h3 className="text-lg font-medium tracking-[-0.02em]">
+                What to send in your first message
+              </h3>
+              <ul className="mt-5 space-y-3">
+                {[
+                  "What the customer should understand in the first few seconds",
+                  "What action you want them to take next",
+                  "Any examples or websites you already like",
+                ].map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-7 text-background/85">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-background/70" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm leading-7 text-background/75">
+                Clear inputs help us reply with sharper ideas instead of generic estimates.
               </p>
             </div>
           </motion.div>
 
           <motion.form
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
             onSubmit={handleSubmit}
-            className="lg:col-span-3 space-y-6"
+            className="rounded-[2rem] border border-border bg-card p-6 sm:p-8"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="flex items-center justify-between gap-4 border-b border-border pb-5">
               <div>
-                <label htmlFor="name" className="block mb-3 text-[0.9375rem] font-medium tracking-tight">
-                  Your Name *
+                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/45">
+                  Project brief
+                </p>
+                <h3 className="mt-2 text-xl font-medium tracking-[-0.02em] text-foreground">
+                  Start the conversation
+                </h3>
+              </div>
+              <span className="hidden rounded-full border border-border bg-background px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/55 sm:inline-flex">
+                Reply within 24h
+              </span>
+            </div>
+
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="mb-2 block text-sm font-medium tracking-tight text-foreground/80">
+                  Your name *
                 </label>
                 <input
                   id="name"
@@ -132,14 +165,14 @@ export function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-5 py-3.5 rounded-xl bg-input-background border border-border focus:border-primary/40 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-[0.9375rem] tracking-[-0.005em]"
+                  className="w-full rounded-2xl border border-border bg-background px-4 py-3.5 text-[0.95rem] text-foreground transition-colors placeholder:text-foreground/35 focus:border-foreground/25 focus:outline-none focus:ring-2 focus:ring-foreground/10"
                   placeholder="John Doe"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block mb-3 text-[0.9375rem] font-medium tracking-tight">
-                  Email Address *
+                <label htmlFor="email" className="mb-2 block text-sm font-medium tracking-tight text-foreground/80">
+                  Email address *
                 </label>
                 <input
                   id="email"
@@ -148,15 +181,15 @@ export function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-5 py-3.5 rounded-xl bg-input-background border border-border focus:border-primary/40 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-[0.9375rem] tracking-[-0.005em]"
+                  className="w-full rounded-2xl border border-border bg-background px-4 py-3.5 text-[0.95rem] text-foreground transition-colors placeholder:text-foreground/35 focus:border-foreground/25 focus:outline-none focus:ring-2 focus:ring-foreground/10"
                   placeholder="john@company.com"
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="company" className="block mb-3 text-[0.9375rem] font-medium tracking-tight">
-                Company Name
+            <div className="mt-5">
+              <label htmlFor="company" className="mb-2 block text-sm font-medium tracking-tight text-foreground/80">
+                Company
               </label>
               <input
                 id="company"
@@ -164,14 +197,14 @@ export function Contact() {
                 type="text"
                 value={formData.company}
                 onChange={handleChange}
-                className="w-full px-5 py-3.5 rounded-xl bg-input-background border border-border focus:border-primary/40 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-[0.9375rem] tracking-[-0.005em]"
-                placeholder="Your Company Inc."
+                className="w-full rounded-2xl border border-border bg-background px-4 py-3.5 text-[0.95rem] text-foreground transition-colors placeholder:text-foreground/35 focus:border-foreground/25 focus:outline-none focus:ring-2 focus:ring-foreground/10"
+                placeholder="Your company or project name"
               />
             </div>
 
-            <div>
-              <label htmlFor="message" className="block mb-3 text-[0.9375rem] font-medium tracking-tight">
-                Project Details *
+            <div className="mt-5">
+              <label htmlFor="message" className="mb-2 block text-sm font-medium tracking-tight text-foreground/80">
+                Project details *
               </label>
               <textarea
                 id="message"
@@ -179,27 +212,21 @@ export function Contact() {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                rows={6}
-                className="w-full px-5 py-3.5 rounded-xl bg-input-background border border-border focus:border-primary/40 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all resize-none text-[0.9375rem] tracking-[-0.005em]"
-                placeholder="Tell us about your project, timeline, and budget..."
+                rows={7}
+                className="w-full resize-none rounded-2xl border border-border bg-background px-4 py-3.5 text-[0.95rem] text-foreground transition-colors placeholder:text-foreground/35 focus:border-foreground/25 focus:outline-none focus:ring-2 focus:ring-foreground/10"
+                placeholder="Tell us what needs to be built, what business result you want, and what success should look like."
               />
             </div>
 
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ y: -1 }}
               whileTap={{ scale: 0.99 }}
-              className="w-full px-8 py-4 bg-primary text-primary-foreground rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed font-medium tracking-tight"
+              className="mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? (
-                "Sending..."
-              ) : (
-                <>
-                  Get in Touch
-                  <Send className="w-5 h-5" />
-                </>
-              )}
+              {isSubmitting ? "Sending..." : "Send inquiry"}
+              <Send className="h-4 w-4" />
             </motion.button>
           </motion.form>
         </div>

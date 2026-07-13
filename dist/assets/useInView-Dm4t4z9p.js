@@ -1,0 +1,1 @@
+import{r}from"./index-BPDGtr3i.js";function i(t={}){const s=r.useRef(null),[u,o]=r.useState(!1);return r.useEffect(()=>{const n=new IntersectionObserver(([c])=>{c.isIntersecting&&o(!0)},{threshold:.1,...t}),e=s.current;return e&&n.observe(e),()=>{e&&n.unobserve(e)}},[t]),{ref:s,inView:u}}export{i as u};
